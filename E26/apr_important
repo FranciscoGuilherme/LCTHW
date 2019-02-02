@@ -1,0 +1,2 @@
+ldconfig
+sudo apt-get install --reinstall libaprutil1
