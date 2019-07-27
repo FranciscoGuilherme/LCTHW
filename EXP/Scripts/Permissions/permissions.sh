@@ -22,7 +22,7 @@
 |----------------------------------------------
 |
 | Command : ./{your_path}/permissions.sh {arg}
-| {arg}   : Absolute path directory that 
+| {arg}   : Absolute path directory that
 |           you want to reset the permissions
 |
 |----------------------------------------------
@@ -40,8 +40,8 @@
 |----------------------------------------------
 '
 
-source ~/Learning/Code/Refactor/C/EXP/Scripts/Permissions/dbg.sh
-source ~/Learning/Code/Refactor/C/EXP/Scripts/Permissions/parameters.sh
+source /home/francisco/Projects/Personal/LCTHW/EXP/Scripts/Common/dbg.sh
+source /home/francisco/Projects/Personal/LCTHW/EXP/Scripts/Permissions/parameters.sh
 
 apply_permissions()
 {
@@ -57,7 +57,7 @@ apply_permissions()
 
 		chmod "${PERMISSIONS[FILE]}" "$item"
 	done
-	
+
 	return 0
 }
 

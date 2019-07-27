@@ -18,56 +18,56 @@
 |----------------------------------------------
 '
 
-source ~/Learning/Code/Refactor/C/EXP/Scripts/Sckeleton/dbg.sh
-source ~/Learning/Code/Refactor/C/EXP/Scripts/Sckeleton/parameters.sh
+source /home/francisco/Projects/Personal/LCTHW/EXP/Scripts/Common/dbg.sh
+source /home/francisco/Projects/Personal/LCTHW/EXP/Scripts/Sckeleton/parameters.sh
 
-build_sckleton()
+function build_sckeleton()
 {
-	local DIRECTORIES_LENGTT=${#DIRECTORIES[@]}
-	local SUBDIR_TEST_LENGTH=${#SUBDIR_TEST[@]}
-	local FILES_LENGTH=${#FILES[@]}
+    local DIRECTORIES_LENGTT=${#DIRECTORIES[@]}
+    local SUBDIR_TEST_LENGTH=${#SUBDIR_TEST[@]}
+    local FILES_LENGTH=${#FILES[@]}
 
-	for ((i = 0; i < DIRECTORIES_LENGTT; i++)); do
-		mkdir "${DIRECTORIES[$i]}"
-	done
+    for ((i = 0; i < DIRECTORIES_LENGTT; i++)); do
+        mkdir "${DIRECTORIES[$i]}"
+    done
 
-	for ((i = 0; i < FILES_LENGTH; i++)); do
-		touch "${FILES[$i]}"
-	done
+    for ((i = 0; i < FILES_LENGTH; i++)); do
+        touch "${FILES[$i]}" || return
+    done
 
-	cd tests
+    cd tests
 
-	for ((i = 0; i < SUBDIR_TEST_LENGTH; i++)); do
-		mkdir "${SUBDIR_TEST[$i]}"
-	done
+    for ((i = 0; i < SUBDIR_TEST_LENGTH; i++)); do
+        mkdir "${SUBDIR_TEST[$i]}"
+    done
 
-	cd ..
+    cd ..
 }
 
-get_target_directory()
+function get_target_directory()
 {
-	local path=$1
+    local path=$1
 
-	while [ -z "$path" ]
-		do
-			printf "%s" "I need the pull path to build C sckeleton: "
-			read -r path
-		done
+    while [ -z "$path" ]
+    do
+        printf "%s" "I need the pull path to build C sckeleton: "
+        read -r path
+    done
 
-	__=$path
+    __=$path
 }
 
-main()
+function main()
 {
-	get_target_directory "$1"; path=${__}
+    get_target_directory "$1"; path=${__}
 
-	if [ "$(pwd)" != "$path" ]; then
-		cd "$path"
-	fi
+    if [ "$(pwd)" != "$path" ]; then
+        cd "$path" || return
+    fi
 
-	build_sckleton && cd ..
+    build_sckleton && cd ..
 
-	bash ~/Learning/Code/Refactor/C/EXP/Scripts/Permissions/permissions.sh "$path"
+    bash "$PERMISSIONS_SCRIPT_DIRECTORY" "$path"
 }
 
 main "$1"

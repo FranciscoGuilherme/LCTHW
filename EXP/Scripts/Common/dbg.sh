@@ -6,7 +6,7 @@
 |----------------------------------------------
 '
 
-build_error_file()
+function build_error_file()
 {
 	__ERRNO__="$1"
 
@@ -17,7 +17,7 @@ build_error_file()
 	} >> "$LOG_FILE"
 }
 
-check()
+function check()
 {
 	__CODE__=$1
 	__ERRNO__=$2
